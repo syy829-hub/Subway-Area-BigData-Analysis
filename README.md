@@ -29,22 +29,28 @@ AI Tool Usage: Gemini: 프로젝트 주제 구체화 및 명세서 기반 기술
 # 1. 데이터 준비 (HDFS 업로드)
 1) HDFS에 데이터를 저장할 디렉토리 생성
 hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/subway
+
 hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/store
 
-2) 로컬 환경의 원본 데이터를 HDFS로 복사
+3) 로컬 환경의 원본 데이터를 HDFS로 복사
 hdfs dfs -put data/subway_merged.csv /user/maria_dev/project/raw_data/subway/
+
 hdfs dfs -put data/store_merged.csv /user/maria_dev/project/raw_data/store/
 
 # 2. 환경 변수 설정 (Python 3.6)
 export LANG=en_US.UTF-8
+
 export LC_ALL=en_US.UTF-8
+
 export PYSPARK_PYTHON='/bin/python3.6'
 
 # 3. 분석 스크립트 실행 (Spark Submit)
  src 폴더에 있는 analysis.py 코드를 Spark를 통해 일괄 실행
+ 
 spark-submit --driver-memory 512m --executor-memory 512m src/analysis.py
 
 # 4. 분석 결과 확인
 위 스크립트 실행이 완료되면, Q1, Q2, Q3 분석 결과가 HDFS의 아래 경로에 CSV 형태로 자동 저장됩니다.
  HDFS에 저장된 결과물 폴더 확인
+ 
 hdfs dfs -ls /user/maria_dev/project/results/
