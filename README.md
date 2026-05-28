@@ -23,3 +23,28 @@ Q2. 평일 출퇴근 시간대 유동인구와 주말 유동인구에 따른 상
 Q3. 역별 승하차 인원 대비 상가 수가 적어 상권 확장이 기대되는 지역은 어디인가?
 최종 결과 도출: Spark SQL을 이용해 도출된 통계 수치를 시각화하여 보고서에 반영합니다.
 AI Tool Usage: Gemini: 프로젝트 주제 구체화 및 명세서 기반 기술 스택 구성, README.md 구조 설계 도움.
+
+실행 가이드
+본 프로젝트는 HDP Sandbox 환경에서 PySpark SQL을 활용하여 구현되었습니다. 아래 순서에 따라 코드를 실행하여 분석 결과를 재현할 수 있습니다.
+1. 데이터 준비 (HDFS 업로드)
+# 1) HDFS에 데이터를 저장할 디렉토리 생성
+hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/subway
+hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/store
+
+# 2) 로컬 환경의 원본 데이터를 HDFS로 복사
+hdfs dfs -put data/subway_merged.csv /user/maria_dev/project/raw_data/subway/
+hdfs dfs -put data/store_merged.csv /user/maria_dev/project/raw_data/store/
+
+2. 환경 변수 설정 (Python 3.6)
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PYSPARK_PYTHON='/bin/python3.6'
+
+3. 분석 스크립트 실행 (Spark Submit)
+ # src 폴더에 있는 analysis.py 코드를 Spark를 통해 일괄 실행
+spark-submit --driver-memory 512m --executor-memory 512m src/analysis.py
+
+4. 분석 결과 확인
+위 스크립트 실행이 완료되면, Q1, Q2, Q3 분석 결과가 HDFS의 아래 경로에 CSV 형태로 자동 저장됩니다.
+# HDFS에 저장된 결과물 폴더 확인
+hdfs dfs -ls /user/maria_dev/project/results/
