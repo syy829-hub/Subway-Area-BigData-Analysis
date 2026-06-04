@@ -26,6 +26,10 @@ AI Tool Usage: Gemini: 프로젝트 주제 구체화 및 명세서 기반 기술
 
 # 실행 가이드
 본 프로젝트는 HDP Sandbox 환경에서 PySpark SQL을 활용하여 구현되었습니다. 아래 순서에 따라 코드를 실행하여 분석 결과를 재현할 수 있습니다.
+본 프로젝트의 데이터 수집 스크립트(`collect_subway.py`)를 실행하려면 서울시 공공데이터 API 키가 필요합니다.
+1. 깃허브에서 코드를 다운로드한 후, `.env.example` 파일의 이름을 `.env`로 변경합니다.
+2. `.env` 파일 안에 본인이 발급받은 API 키를 입력하고 저장한 뒤 실행해 주세요.
+*(분석 결과만 확인하실 경우 이 과정을 생략하고 3번 분석 스크립트부터 실행하시면 됩니다.)*
 # 1. 데이터 준비 (HDFS 업로드)
 1) HDFS에 데이터를 저장할 디렉토리 생성
 hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/subway
