@@ -1,6 +1,6 @@
-###.env
-###__pycache__/
-###data/raw/
+.env
+__pycache__/
+data/raw/
 
 
 
