@@ -35,7 +35,7 @@ AI Tool Usage: Gemini: 프로젝트 주제 구체화 및 명세서 기반 기술
 *(분석 결과만 확인하실 경우 이 과정을 생략하고 3번 분석 스크립트부터 실행하시면 됩니다.)*
 # 1. 데이터 준비 (HDFS 업로드)
 1) HDFS에 데이터를 저장할 디렉토리 생성
-2) 
+
 hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/subway
 
 hdfs dfs -mkdir -p /user/maria_dev/project/raw_data/store
